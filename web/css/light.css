@@ -18,13 +18,14 @@ body { font-family:"Roboto", sans-serif; background: #ebebeb url('../img/light.p
 tr.even.expandRow > :hover { background: #F9F9F9 !important; }
 tr.odd.expandRow > :hover { background: #FFF !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
-#cpu, #memory, #hdd 					{ min-width: 50px; }
+#cpu, #memory, #hdd, #network				{ min-width: 50px; }
+#ping { min-width: 55px; max-width: 130px; }
 
 @media only screen and (max-width: 1060px) {
-	#connections, tr td:nth-child(10)	{ display:none; visibility:hidden; }
+	#connections, tr td:nth-child(10)		{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 992px) {
-	#location, tr td:nth-child(7)		{ display:none; visibility:hidden; }
+	#location, tr td:nth-child(7)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
 	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 	#hdd, tr td:nth-child(16)			{ display:none; visibility:hidden; }
