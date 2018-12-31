@@ -289,21 +289,25 @@ function uptime() {
 				TableRow.children["hdd"].children[0].children[0].innerHTML = HDD + "%";
 				ExpandRow[0].children["expand_hdd"].innerHTML = "Disk: " + bytesToSize(result.servers[i].hdd_used*1024*1024, 2) + " / " + bytesToSize(result.servers[i].hdd_total*1024*1024, 2);
 
-				// loss
+				// delay time
+
+				// tcp connect
+
+				// ping
 				var PING_10010 = result.servers[i].ping_10010.toFixed(2);
 				var PING_189 = result.servers[i].ping_189.toFixed(2);
 				var PING_10086 = result.servers[i].ping_10086.toFixed(2);
 				var pingTime = result.servers[i].time_10010 + "ms | " + result.servers[i].time_189 + "ms | " + result.servers[i].time_10086 + "ms"
 				if (PING_10010 >= 30.0 || PING_189 >= 30.0 || PING_10086 >= 30.0)
-                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
+					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
 				else if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
-                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
-                else
-                    TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
-                    TableRow.children["ping"].children[0].children[0].setAttribute("data-toggle", "tooltip");
-                    TableRow.children["ping"].children[0].children[0].setAttribute("data-placement", "right");
-                    TableRow.children["ping"].children[0].children[0].setAttribute("title", pingTime);
-				TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
+					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
+				else
+					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
+					TableRow.children["ping"].children[0].children[0].setAttribute("data-toggle", "tooltip");
+					TableRow.children["ping"].children[0].children[0].setAttribute("data-placement", "right");
+					TableRow.children["ping"].children[0].children[0].setAttribute("title", pingTime);
+						TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
 
 				// Custom
 				if (result.servers[i].custom) {
