@@ -197,8 +197,13 @@ def get_network(ip_version):
 
 lostRate = {
     '10010': 0.0,
-    '189': 0.0,
     '10086': 0.0
+    '189': 0.0,
+}
+pingTime = {
+    '10010': 0,
+    '10086': 0
+    '189': 0,
 }
 
 def _ping_thread(host, mark, port):
@@ -210,7 +215,9 @@ def _ping_thread(host, mark, port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(1)
         try:
+            b = timeit.default_timer()
             s.connect((host, port))
+            pingTime[mark] = int((timeit.default_timer()-b)*1000)
         except:
             lostPacket += 1
         finally:
@@ -343,6 +350,10 @@ if __name__ == '__main__':
                 array['ping_10010'] = lostRate.get('10010') * 100
                 array['ping_10086'] = lostRate.get('10086') * 100
                 array['ping_189'] = lostRate.get('189') * 100
+                array['time_10010'] = pingTime.get('10010')
+                array['time_10086'] = pingTime.get('10086')
+                array['time_189'] = pingTime.get('189')
+                array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
 
                 s.send("update " + json.dumps(array) + "\n")
         except KeyboardInterrupt:
