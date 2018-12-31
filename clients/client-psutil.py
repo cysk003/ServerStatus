@@ -9,6 +9,7 @@ INTERVAL = 1
 
 import socket
 import time
+import timeit
 import os
 import json
 import collections
@@ -115,6 +116,24 @@ def liuliang():
             NET_OUT += v[0]
     return NET_IN, NET_OUT
 
+def tupd():
+    '''
+    tcp, udp, process, thread count: for view ddcc attack , then send warning
+    :return:
+    '''
+    if 'linux' in sys.platform:
+        t = int(os.popen('ss -t|wc -l').read()[:-1])-1
+        u = int(os.popen('ss -u|wc -l').read()[:-1])-1
+        p = int(os.popen('ps -ef|wc -l').read()[:-1])-2
+        d = int(os.popen('ps -xH|wc -l').read()[:-1])-2
+    else:
+        t = int(os.popen('netstat -an|find "TCP" /c').read()[:-1])-1
+        u = int(os.popen('netstat -an|find "UDP" /c').read()[:-1])-1
+        p = len(psutil.pids())
+        # cpu is high, wait fix
+        d = sum([psutil.Process(k).num_threads() for k in [x for x in psutil.pids()]])
+    return t,u,p,d
+
 def ip_status():
     object_check = ['www.10010.com', 'www.10086.cn', 'www.189.cn']
     ip_check = 0
@@ -146,8 +165,13 @@ def get_network(ip_version):
 
 lostRate = {
     '10010': 0.0,
-    '189': 0.0,
     '10086': 0.0
+    '189': 0.0,
+}
+pingTime = {
+    '10010': 0,
+    '10086': 0
+    '189': 0,
 }
 
 def _ping_thread(host, mark, port):
@@ -158,7 +182,9 @@ def _ping_thread(host, mark, port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(1)
         try:
+            b = timeit.default_timer()
             s.connect((host, port))
+            pingTime[mark] = int((timeit.default_timer() - b) * 1000)
         except:
             lostPacket += 1
         finally:
@@ -292,6 +318,10 @@ if __name__ == '__main__':
                 array['ping_10010'] = lostRate.get('10010') * 100
                 array['ping_10086'] = lostRate.get('10086') * 100
                 array['ping_189'] = lostRate.get('189') * 100
+                array['time_10010'] = pingTime.get('10010')
+                array['time_10086'] = pingTime.get('10086')
+                array['time_189'] = pingTime.get('189')
+                array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
 
                 s.send("update " + json.dumps(array) + "\n")
         except KeyboardInterrupt:
