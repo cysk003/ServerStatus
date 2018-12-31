@@ -19,7 +19,7 @@ tr.even.expandRow > :hover { background: #F9F9F9 !important; }
 tr.odd.expandRow > :hover { background: #FFF !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
 #cpu, #memory, #hdd, #network				{ min-width: 50px; }
-#loss { min-width: 55px; max-width: 130px; }
+#ping { min-width: 55px; max-width: 130px; }
 
 @media only screen and (max-width: 1060px) {
 	#connections, tr td:nth-child(10)		{ display:none; visibility:hidden; }
@@ -27,7 +27,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 @media only screen and (max-width: 992px) {
 	#location, tr td:nth-child(7)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
-	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
+	#ping, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 	#hdd, tr td:nth-child(16)			{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 720px) {
@@ -35,7 +35,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#host, tr td:nth-child(6)			{ display:none; visibility:hidden; }
 	#location, tr td:nth-child(7)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
-	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
+	#ping, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 600px) {
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
@@ -43,7 +43,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#location, tr td:nth-child(7)			{ display:none; visibility:hidden; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
-	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
+	#ping, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 }
 @media only screen and (max-width: 533px) {
 	#type, tr td:nth-child(5)			{ display:none; visibility:hidden; }
@@ -52,7 +52,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
 	#connections, tr td:nth-child(10)		{ display:none; visibility:hidden; }
-	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
+	#ping, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 	#cpu, #memory, #hdd				{ min-width: 25px; max-width: 50px; }
 }
 @media only screen and (max-width: 450px) {
@@ -66,7 +66,7 @@ tr.odd.expandRow > :hover { background: #FFF !important; }
 	#uptime, tr td:nth-child(8)			{ display:none; visibility:hidden; }
 	#load, tr td:nth-child(9)			{ display:none; visibility:hidden; }
 	#connections, tr td:nth-child(10)		{ display:none; visibility:hidden; }
-	#loss, tr td:nth-child(11)			{ display:none; visibility:hidden; }
+	#ping, tr td:nth-child(11)			{ display:none; visibility:hidden; }
 	#hdd, tr td:nth-child(16)			{ display:none; visibility:hidden; }
 	#cpu, #memory, #hdd				{ min-width: 25px; max-width: 50px; }
 }
