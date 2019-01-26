@@ -142,16 +142,24 @@ int CMain::HandleMessage(int ClientNetID, char *pMessage)
 			pClient->m_Stats.m_Connections = rStart["connections"].u.dbl;
 		if(rStart["ping_10010"].type)
 			pClient->m_Stats.m_ping_10010 = rStart["ping_10010"].u.dbl;
-		if(rStart["ping_189"].type)
-			pClient->m_Stats.m_ping_189 = rStart["ping_189"].u.dbl;
 		if(rStart["ping_10086"].type)
 			pClient->m_Stats.m_ping_10086 = rStart["ping_10086"].u.dbl;
+		if(rStart["ping_189"].type)
+			pClient->m_Stats.m_ping_189 = rStart["ping_189"].u.dbl;
 		if(rStart["time_10010"].type)
 			pClient->m_Stats.m_time_10010 = rStart["time_10010"].u.integer;
-		if(rStart["time_189"].type)
-			pClient->m_Stats.m_time_189 = rStart["time_189"].u.integer;
 		if(rStart["time_10086"].type)
 			pClient->m_Stats.m_time_10086 = rStart["time_10086"].u.integer;
+		if(rStart["time_189"].type)
+			pClient->m_Stats.m_time_189 = rStart["time_189"].u.integer;
+		if(rStart["tcp"].type)
+			pClient->m_Stats.m_tcpCount = rStart["tcp"].u.integer;
+		if(rStart["udp"].type)
+			pClient->m_Stats.m_udpCount = rStart["udp"].u.integer;
+		if(rStart["process"].type)
+			pClient->m_Stats.m_processCount = rStart["process"].u.integer;
+		if(rStart["thread"].type)
+			pClient->m_Stats.m_threadCount = rStart["thread"].u.integer;
 		if(rStart["network_rx"].type)
 			pClient->m_Stats.m_NetworkRx = rStart["network_rx"].u.integer;
 		if(rStart["network_tx"].type)
