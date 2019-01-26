@@ -106,6 +106,7 @@ function uptime() {
 						"<div id=\"expand_mem\">Loading...</div>" +
 						"<div id=\"expand_swap\">Loading...</div>" +
 						"<div id=\"expand_hdd\">Loading...</div>" +
+						"<div id=\"expand_tupd\">Loading...</div>" +
 						"<div id=\"expand_custom\">Loading...</div>" +
 					"</div></td></tr>"
 				);
