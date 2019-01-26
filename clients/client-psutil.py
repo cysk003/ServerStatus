@@ -165,13 +165,13 @@ def get_network(ip_version):
 
 lostRate = {
     '10010': 0.0,
-    '10086': 0.0
-    '189': 0.0,
+    '10086': 0.0,
+    '189': 0.0
 }
 pingTime = {
     '10010': 0,
-    '10086': 0
-    '189': 0,
+    '10086': 0,
+    '189': 0
 }
 
 def _ping_thread(host, mark, port):
