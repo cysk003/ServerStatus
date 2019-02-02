@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 SERVER = "127.0.0.1"
 PORT = 35601
@@ -81,9 +81,10 @@ class Traffic:
     def get(self):
         avgrx = 0; avgtx = 0
         for name, stats in psutil.net_io_counters(pernic=True).iteritems():
-            if name == "lo" or name.find("tun") > -1 \
-                    or name.find("docker") > -1 or name.find("veth") > -1 \
-                    or name.find("br-") > -1:
+            if "lo" in name or "tun" in name \
+                or "docker" in name or "veth" in name \
+                or "br-" in name or "vmbr" in name \
+                or "vnet" in name or "kube" in name:
                 continue
             avgrx += stats.bytes_recv
             avgtx += stats.bytes_sent
@@ -107,9 +108,10 @@ def liuliang():
     NET_OUT = 0
     net = psutil.net_io_counters(pernic=True)
     for k, v in net.items():
-        if k == 'lo' or 'tun' in k \
-                or 'br-' in k \
-                or 'docker' in k or 'veth' in k:
+        if 'lo' in k or 'tun' in k \
+                or 'docker' in k or 'veth' in k \
+                or 'br-' in k or 'vmbr' in k \
+                or 'vnet' in k or 'kube' in k:
             continue
         else:
             NET_IN += v[1]
