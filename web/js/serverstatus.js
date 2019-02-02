@@ -305,9 +305,9 @@ function uptime() {
 					TableRow.children["ping"].children[0].children[0].className = "progress-bar progress-bar-warning";
 				else
 					TableRow.children["ping"].children[0].children[0].className = "progress-bar progress-bar-success";
-                    TableRow.children["ping"].children[0].children[0].setAttribute("data-toggle", "tooltip");
-                    TableRow.children["ping"].children[0].children[0].setAttribute("data-placement", "right");
-                    TableRow.children["ping"].children[0].children[0].setAttribute("title", pingTime);
+					TableRow.children["ping"].children[0].children[0].setAttribute("data-toggle", "tooltip");
+					TableRow.children["ping"].children[0].children[0].setAttribute("data-placement", "right");
+					TableRow.children["ping"].children[0].children[0].setAttribute("title", pingTime);
 						TableRow.children["ping"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
 
 				// Custom
