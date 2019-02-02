@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 SERVER = "127.0.0.1"
 PORT = 35601
@@ -33,7 +33,7 @@ def get_memory():
     for line in open('/proc/meminfo'):
         match = re_parser.match(line)
         if not match:
-            continue;
+            continue
         key, value = match.groups(['key', 'value'])
         result[key] = int(value)
 
@@ -112,9 +112,10 @@ class Traffic:
 
         for dev in net_dev[2:]:
             dev = dev.split(':')
-            if dev[0].strip() == "lo" or dev[0].find("tun") > -1 \
-                    or dev[0].find("docker") > -1 or dev[0].find("veth") > -1 \
-                    or dev[0].find("br-") > -1:
+            if "lo" in dev[0] or "tun" in dev[0] \
+                    or "docker" in dev[0] or "veth" in dev[0] \
+                    or "br-" in dev[0] or "vmbr" in dev[0] \
+                    or "vnet" in dev[0] or "kube" in dev[0]:
                 continue
             dev = dev[1].split()
             avgrx += int(dev[0])
@@ -143,7 +144,8 @@ def liuliang():
             if netinfo:
                 if netinfo[0][0] == 'lo' or 'tun' in netinfo[0][0] \
                         or 'docker' in netinfo[0][0] or 'veth' in netinfo[0][0] \
-                        or 'br-' in netinfo[0][0] \
+                        or 'br-' in netinfo[0][0] or 'vmbr' in netinfo[0][0] \
+                        or 'vnet' in netinfo[0][0] or 'kube' in netinfo[0][0] \
                         or netinfo[0][1]=='0' or netinfo[0][9]=='0':
                     continue
                 else:
