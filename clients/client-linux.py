@@ -53,7 +53,7 @@ def get_hdd():
     return int(size), int(used)
 
 def get_connections():
-    tmp_connections = os.popen("echo -e $(( $(netstat -anp |grep ESTABLISHED |grep tcp |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l) + $(netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |sort -u |grep -E -o '[0-9:a-fA-F]+' |awk -F ':' '{print $4}' |wc -l) ))").read()
+    tmp_connections = os.popen("echo $(( $(netstat -anp |grep ESTABLISHED |grep tcp |awk '{print $5}' |awk -F ':' '{print $1}' |sort -u |grep -E -o '([0-9]{1,3}[\.]){3}[0-9]{1,3}' |wc -l) + $(netstat -anp |grep ESTABLISHED |grep tcp6 |awk '{print $5}' |sort -u |grep -E -o '[0-9:a-fA-F]+' |awk -F ':' '{print $4}' |wc -l) ))").read()
     return float(tmp_connections)
 
 def get_custom_msg():
