@@ -22,7 +22,7 @@ tr.even.expandRow > :hover { background: #2F2F2F !important; }
 tr.odd.expandRow > :hover { background: #000 !important; }
 .expandRow > td { padding: 0 !important; border-top: 0px !important; }
 #cpu, #memory, #hdd, #network				{ min-width: 50px; }
-#ping { min-width: 140px; max-width: 140px; }
+#ping { min-width: 145px; max-width: 145px; }
 
 @media only screen and (max-width: 1165px) {
 	#connections, tr td:nth-child(10)	{ display:none; visibility:hidden; }
