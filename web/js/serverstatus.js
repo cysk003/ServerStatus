@@ -27,7 +27,7 @@ function timeSince(date) {
 	/*if(Math.floor(seconds) >= 5)
 		return Math.floor(seconds) + " seconds";*/
 	else
-		return "a few seconds ago.";
+		return "few seconds ago.";
 }
 
 function bytesToSize(bytes, precision, si)
@@ -85,29 +85,29 @@ function uptime() {
 			if (!TableRow.length) {
 				$("#servers").append(
 					"<tr id=\"r" + i + "\" data-toggle=\"collapse\" data-target=\"#rt" + i + "\" class=\"accordion-toggle " + hack + "\">" +
-						"<td id=\"online4\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"online6\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"ip_status\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"name\">Loading...</td>" +
-						"<td id=\"type\">Loading...</td>" +
-						"<td id=\"host\">Loading...</td>" +
-						"<td id=\"location\">Loading...</td>" +
-						"<td id=\"uptime\">Loading...</td>" +
-						"<td id=\"load\">Loading...</td>" +
-						"<td id=\"connections\">Loading...</td>" +
-						"<td id=\"loss\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"network\">Loading...</td>" +
-						"<td id=\"traffic\">Loading...</td>" +
-						"<td id=\"cpu\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"memory\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
-						"<td id=\"hdd\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading...</small></div></div></td>" +
+						"<td id=\"online4\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"online6\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"ip_status\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"name\">Loading</td>" +
+						"<td id=\"type\">Loading</td>" +
+						"<td id=\"host\">Loading</td>" +
+						"<td id=\"location\">Loading</td>" +
+						"<td id=\"uptime\">Loading</td>" +
+						"<td id=\"load\">Loading</td>" +
+						"<td id=\"connections\">Loading</td>" +
+						"<td id=\"loss\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"network\">Loading</td>" +
+						"<td id=\"traffic\">Loading</td>" +
+						"<td id=\"cpu\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"memory\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
+						"<td id=\"hdd\"><div class=\"progress\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-warning\"><small>Loading</small></div></div></td>" +
 					"</tr>" +
 					"<tr class=\"expandRow " + hack + "\"><td colspan=\"16\", style=\"word-wrap:break-word;word-break:break-all;\"><div class=\"accordian-body collapse\" id=\"rt" + i + "\">" +
-						"<div id=\"expand_mem\">Loading...</div>" +
-						"<div id=\"expand_swap\">Loading...</div>" +
-						"<div id=\"expand_hdd\">Loading...</div>" +
-						"<div id=\"expand_tupd\">Loading...</div>" +
-						"<div id=\"expand_custom\">Loading...</div>" +
+						"<div id=\"expand_mem\">Loading</div>" +
+						"<div id=\"expand_swap\">Loading</div>" +
+						"<div id=\"expand_hdd\">Loading</div>" +
+						"<div id=\"expand_tupd\">Loading</div>" +
+						"<div id=\"expand_custom\">Loading</div>" +
 					"</div></td></tr>"
 				);
 				TableRow = $("#servers tr#r" + i);
@@ -332,16 +332,16 @@ function uptime() {
 				TableRow.children["online6"].children[0].children[0].innerHTML = "<small>Error</small>";
 				TableRow.children["ip_status"].children[0].children[0].className = "progress-bar progress-bar-error";
 				TableRow.children["ip_status"].children[0].children[0].innerHTML = "<small>Error</small>";
-				TableRow.children["name"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
-				TableRow.children["type"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
-				TableRow.children["host"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
-				TableRow.children["location"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["name"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["type"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["host"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["location"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["uptime"].children[0].children[0].className = "progress-bar progress-bar-error";
 				TableRow.children["uptime"].children[0].children[0].innerHTML = "<small>Error</small>";
 				TableRow.children["load"].children[0].children[0].className = "progress-bar progress-bar-error";
 				TableRow.children["load"].children[0].children[0].innerHTML = "<small>Error</small>";
-				TableRow.children["connections"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
-				TableRow.children["loss"].innerHTML = "<div class=\"progress progress-striped active\"><div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["connections"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
+				TableRow.children["loss"].innerHTML = "<div style=\"width: 100%;\" class=\"progress-bar progress-bar-error\"><small>Error</small></div></div>";
 				TableRow.children["network"].children[0].children[0].className = "progress-bar progress-bar-error";
 				TableRow.children["network"].children[0].children[0].innerHTML = "<small>Error</small>";
 				TableRow.children["traffic"].children[0].children[0].className = "progress-bar progress-bar-error";
