@@ -38,9 +38,7 @@ def get_memory():
         result[key] = int(value)
 
     MemTotal = float(result['MemTotal'])
-    MemFree = float(result['MemFree'])
-    Cached = float(result['Cached'])
-    MemUsed = MemTotal - (Cached + MemFree)
+    MemUsed = MemTotal-float(result['MemFree'])-float(result['Buffers'])-float(result['Cached'])-float(result['SReclaimable'])
     SwapTotal = float(result['SwapTotal'])
     SwapFree = float(result['SwapFree'])
     return int(MemTotal), int(MemUsed), int(SwapTotal), int(SwapFree)
