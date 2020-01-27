@@ -96,7 +96,7 @@ def get_cpu():
     if st == 0:
         st = 1
     result = 100-(t[len(t)-1]*100.00/st)
-    return round(result)
+    return round(result, 1)
 
 class Traffic:
     def __init__(self):
@@ -162,7 +162,7 @@ def tupd():
     u = int(s[:-1])-1
     s = subprocess.check_output("ps -ef|wc -l", shell=True)
     p = int(s[:-1])-2
-    s = subprocess.check_output("ps -xH|wc -l", shell=True)
+    s = subprocess.check_output("ps -eLf|wc -l", shell=True)
     d = int(s[:-1])-2
     return t,u,p,d
 
@@ -264,6 +264,20 @@ def get_packetLostRate():
     t2.start()
     t3.start()
 
+def byte_str(object):
+    '''
+    bytes to str, str to bytes
+    :param object:
+    :return:
+    '''
+    if isinstance(object, str):
+        return object.encode(encoding="utf-8")
+    elif isinstance(object, bytes):
+        return bytes.decode(object)
+    else:
+        print(type(object))
+
+
 if __name__ == '__main__':
     for argc in sys.argv:
         if 'SERVER' in argc:
@@ -283,10 +297,10 @@ if __name__ == '__main__':
             print("Connecting...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((SERVER, PORT))
-            data = s.recv(1024)
+            data = byte_str(s.recv(1024))
             if data.find("Authentication required") > -1:
-                s.send(USER + ':' + PASSWORD + '\n')
-                data = s.recv(1024)
+                s.send(byte_str(USER + ':' + PASSWORD + '\n'))
+                data = byte_str(s.recv(1024))
                 if data.find("Authentication successful") < 0:
                     print(data)
                     raise socket.error
@@ -295,7 +309,7 @@ if __name__ == '__main__':
                 raise socket.error
 
             print(data)
-            data = s.recv(1024)
+            data = byte_str(s.recv(1024))
             print(data)
 
             timer = 0
@@ -355,7 +369,7 @@ if __name__ == '__main__':
                 array['time_189'] = pingTime.get('189')
                 array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
 
-                s.send("update " + json.dumps(array) + "\n")
+                s.send(byte_str("update " + json.dumps(array) + "\n"))
         except KeyboardInterrupt:
             raise
         except socket.error:
