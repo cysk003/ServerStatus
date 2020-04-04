@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 SERVER = "127.0.0.1"
@@ -51,7 +51,7 @@ def get_hdd():
     return int(size), int(used)
 
 def get_connections():
-    tmp_connections = os.popen("ss -tu |grep ESTAB |awk '{print $6}' |sort -u").read()
+    tmp_connections = os.popen("ss -tu |grep ESTAB |awk '{print $6}' |sort -u |wc -l").read()
     return float(tmp_connections)
 
 def get_custom_msg():
