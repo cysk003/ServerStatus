@@ -130,14 +130,10 @@ def ip_status():
     object_check = ['www.10010.com', 'www.10086.cn', 'www.189.cn']
     ip_check = 0
     for i in object_check:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
         try:
-            s.connect((i, 80))
+            socket.create_connection((i, PORBEPORT), timeout=1).close()
         except:
             ip_check += 1
-        s.close()
-        del s
     if ip_check >= 2:
         return False
     else:
@@ -149,8 +145,7 @@ def get_network(ip_version):
     elif(ip_version == 6):
         HOST = "ipv6.google.com"
     try:
-        s = socket.create_connection((HOST, 80), 2)
-        s.close()
+        socket.create_connection((HOST, 80), 2).close()
         return True
     except:
         return False
@@ -180,17 +175,14 @@ def _ping_thread(host, mark, port):
     startTime = time.time()
 
     while True:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
         try:
             b = timeit.default_timer()
-            s.connect((host, port))
+            socket.create_connection((host, port), timeout=1).close()
             pingTime[mark] = int((timeit.default_timer()-b)*1000)
         except:
             lostPacket += 1
         finally:
             allPacket += 1
-        s.close()
         if allPacket > 100:
             lostRate[mark] = float(lostPacket) / allPacket
         endTime = time.time()
@@ -293,8 +285,7 @@ if __name__ == '__main__':
     while True:
         try:
             print("Connecting...")
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((SERVER, PORT))
+            s = socket.create_connection((SERVER, PORT))
             data = byte_str(s.recv(1024))
             if data.find("Authentication required") > -1:
                 s.send(byte_str(USER + ':' + PASSWORD + '\n'))
@@ -370,10 +361,11 @@ if __name__ == '__main__':
             raise
         except socket.error:
             print("Disconnected...")
-            # keep on trying after a disconnect
-            s.close()
+            if 's' in locals().keys():
+                del s
             time.sleep(3)
         except Exception as e:
             print("Caught Exception:", e)
-            s.close()
+            if 's' in locals().keys():
+                del s
             time.sleep(3)
