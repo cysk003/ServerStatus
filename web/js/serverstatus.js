@@ -107,6 +107,7 @@ function uptime() {
 						"<div id=\"expand_swap\">Loading</div>" +
 						"<div id=\"expand_hdd\">Loading</div>" +
 						"<div id=\"expand_tupd\">Loading</div>" +
+						"<div id=\"expand_ping\">Loading</div>" +
 						"<div id=\"expand_custom\">Loading</div>" +
 					"</div></td></tr>"
 				);
@@ -294,21 +295,20 @@ function uptime() {
 				// tcp, udp, process, thread count
  				ExpandRow[0].children["expand_tupd"].innerHTML = "TCP/UDP/Process/Thread: " + result.servers[i].tcp_count + " / " + result.servers[i].udp_count + " / " + result.servers[i].process_count+ " / " + result.servers[i].thread_count;
 
+				// ping
+				ExpandRow[0].children["expand_ping"].innerHTML = "CU/CM/CT: " + result.servers[i].time_10010 + "ms / " + result.servers[i].time_10086 + "ms / " + result.servers[i].time_189 + "ms"
+
 				// loss
 				var PING_10010 = result.servers[i].ping_10010.toFixed(2);
-				var PING_189 = result.servers[i].ping_189.toFixed(2);
 				var PING_10086 = result.servers[i].ping_10086.toFixed(2);
-				var pingTime = result.servers[i].time_10010 + "ms | " + result.servers[i].time_189 + "ms | " + result.servers[i].time_10086 + "ms"
-				if (PING_10010 >= 30.0 || PING_189 >= 30.0 || PING_10086 >= 30.0)
+				var PING_189 = result.servers[i].ping_189.toFixed(2);
+				if (PING_10010 >= 30.0 || PING_10086 >= 30.0 || PING_189 >= 30.0)
 					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-danger";
-				else if (PING_10010 >= 10.0 || PING_189 >= 10.0 || PING_10086 >= 10.0)
+				else if (PING_10010 >= 10.0 || PING_10086 >= 10.0 || PING_189 >= 10.0)
 					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-warning";
 				else
 					TableRow.children["loss"].children[0].children[0].className = "progress-bar progress-bar-success";
-					TableRow.children["loss"].children[0].children[0].setAttribute("data-toggle", "tooltip");
-					TableRow.children["loss"].children[0].children[0].setAttribute("data-placement", "right");
-					TableRow.children["loss"].children[0].children[0].setAttribute("title", pingTime);
-						TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
+					TableRow.children["loss"].children[0].children[0].innerHTML = PING_10010 + "% | " + PING_10086 + "% | " + PING_189 + "%" ;
 
 				// Custom
 				if (result.servers[i].custom) {
