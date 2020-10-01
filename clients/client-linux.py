@@ -20,12 +20,9 @@ import threading
 import io
 
 def get_uptime():
-    f = open('/proc/uptime', 'r')
-    uptime = f.readline()
-    f.close()
-    uptime = uptime.split('.', 2)
-    time = int(uptime[0])
-    return int(time)
+    with open('/proc/uptime', 'r') as f:
+        uptime = f.readline().split('.', 2)
+        return int(uptime[0])
 
 def get_memory():
     re_parser = re.compile(r'^(?P<key>\S*):\s*(?P<value>\d*)\s*kB')
@@ -75,12 +72,11 @@ def get_custom_msg():
     return result
 
 def get_time():
-    stat_file = open("/proc/stat", "r")
-    time_list = stat_file.readline().split(' ')[2:6]
-    stat_file.close()
-    for i in range(len(time_list))  :
-        time_list[i] = int(time_list[i])
-    return time_list
+    with open("/proc/stat", "r") as f:
+        time_list = f.readline().split(' ')[2:6]
+        for i in range(len(time_list))  :
+            time_list[i] = int(time_list[i])
+        return time_list
 
 def delta_time():
     x = get_time()
@@ -98,10 +94,23 @@ def get_cpu():
     result = 100-(t[len(t)-1]*100.00/st)
     return round(result, 1)
 
+traffic_clock = time.time()
+traffic_diff = 0
+def TCLOCK(func):
+    def wrapper(*args, **kwargs):
+        global traffic_clock, traffic_diff
+        now_clock = time.time()
+        traffic_diff = now_clock - traffic_clock
+        traffic_clock = now_clock
+        return func(*args, **kwargs)
+    return wrapper
+
 class Traffic:
     def __init__(self):
         self.rx = collections.deque(maxlen=10)
         self.tx = collections.deque(maxlen=10)
+
+    @TCLOCK
     def get(self):
         f = open('/proc/net/dev', 'r')
         net_dev = f.readlines()
@@ -128,8 +137,8 @@ class Traffic:
             avgrx += self.rx[x+1] - self.rx[x]
             avgtx += self.tx[x+1] - self.tx[x]
 
-        avgrx = int(avgrx / l / INTERVAL)
-        avgtx = int(avgtx / l / INTERVAL)
+        avgrx = int(avgrx / l / traffic_diff)
+        avgtx = int(avgtx / l / traffic_diff)
 
         return avgrx, avgtx
 
@@ -292,7 +301,7 @@ if __name__ == '__main__':
             INTERVAL = int(argc.split('INTERVAL=')[-1])
     socket.setdefaulttimeout(30)
     get_packetLostRate()
-    while 1:
+    while True:
         try:
             print("Connecting...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -324,7 +333,7 @@ if __name__ == '__main__':
 
             traffic = Traffic()
             traffic.get()
-            while 1:
+            while True:
                 CPU = get_cpu()
                 NetRx, NetTx = traffic.get()
                 NET_IN, NET_OUT = liuliang()
